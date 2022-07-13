@@ -37,6 +37,22 @@ private:
 			return false;
 	}
 
+	//Інспектори порівняння дробів (>)
+	bool isBig(const Fraction& d)
+	{
+		float num1 = static_cast<float>(this->numer) / this->denom;
+		float num2 = static_cast<float>(d.numer) / d.denom;
+		return (num2 > num1) ? true : false;
+	}
+	
+	//Інспектори порівняння дробів (==)
+	bool isEqual(const Fraction& d)
+	{
+		float num1 = static_cast<float>(this->numer) / this->denom;
+		float num2 = static_cast<float>(d.numer) / d.denom;
+		return (num2 == num1) ? true : false;
+	}
+
 	////Метод скорочення дробу
 	void сut()
 	{
@@ -90,7 +106,7 @@ public:
 			denom = numDown;
 	}
 
-	//Метод додавання дробей 
+	//Метод додавання дробей, повертає результуючій дріб
 	Fraction add(const Fraction& d)
 	{
 		Fraction temp;
@@ -100,7 +116,7 @@ public:
 		return temp;
 	}
 
-	//Метод віднімання дробей
+	//Метод віднімання дробей, повертає результуючій дріб
 	Fraction dif(const Fraction& d)
 	{
 		Fraction temp;
@@ -110,7 +126,7 @@ public:
 		return temp;
 	}
 	
-	//Метод множення дробів 
+	//Метод множення дробів, повертає результуючій дріб
 	Fraction mult(const Fraction& d)
 	{
 		Fraction temp;
@@ -120,7 +136,7 @@ public:
 		return temp;
 	}
 
-	//Метод ділення дробів 
+	//Метод ділення дробів, повертає результуючій дріб
 	Fraction div(const Fraction& d)
 	{
 		if (d.numer == 0)
@@ -135,6 +151,110 @@ public:
 		return temp;
 	}
 
+	//Метод порівняння дробів, повертає більший дріб
+	Fraction more(const Fraction& d)
+	{
+		Fraction temp;
+		
+		if (this->isBig(d))
+		{
+			temp.numer = d.numer;
+			temp.denom = d.denom;
+			
+		}
+		else
+			temp = 0;
+		return temp;
+	}
+
+	//Метод порівняння дробів, повертає менший дріб
+	Fraction less(const Fraction& d)
+	{
+		Fraction temp;
+
+		if (this->isBig(d))
+		{
+			temp.numer = this->numer;
+			temp.denom = this->denom;
+		}
+		else
+			temp = 0;
+
+		return temp;
+	}
+	
+	//Метод порівняння дробів, виводить (== || !=)
+	void compare(const Fraction& d)
+	{
+		if (isEqual(d))
+		{
+			std::cout << this->numer << '/' << this->denom;
+			std::cout << " == " << d.numer << '/' << d.denom << '\n';
+		}
+		else
+		{
+			std::cout << this->numer << '/' << this->denom;
+			std::cout << " != " << d.numer << '/' << d.denom << '\n';
+		}
+	}
+
+	////Інкременти та декременти класу
+	//Префіксний інкремент класу
+	Fraction& operator++()
+	{
+		numer += denom;
+		return *this;
+	}
+	//Постфіксний інкремент класу
+	Fraction& operator++(int)
+	{
+		Fraction temp{ *this };
+		numer += denom;
+		return temp;
+	}
+	//Постфіксний декремент класу
+	Fraction& operator--(int)
+	{
+		Fraction temp{ *this };
+		numer -= denom;
+		return temp;
+	}
+	//Префіксний декремент класу
+	Fraction& operator--()
+	{
+		numer -= denom;
+		return *this;
+	}
+
+	////Методи додавання дробів(+перегрузки)
+	//Метод додавання дробів (клас + клас = клас)
+	Fraction operator+(Fraction& d)
+	{
+		return this->add(d);
+	}
+	//Метод додавання дробів (клас + інт = клас)
+	Fraction operator+(const int d)
+	{
+		return this->add(d);
+	}
+	//Метод додавання дробів ( інт + клас = клас)
+	//винесено з класу через неможливість обійти помилку з двома членами
+
+	////Методи віднімання дробів(+перегрузки)
+	//Метод віднімання дробів (клас - клас = клас)
+	Fraction operator-(Fraction& d)
+	{
+		return this->dif(d);
+	}
+	//Метод віднімання дробів (клас - інт = клас)
+	Fraction operator-(const int d)
+	{
+		return this->dif(d);
+	}
+	//Метод віднімання дробів ( інт - клас = клас)
+	//винесено з класу через неможливість обійти помилку з двома членами
+
+	//Геттер (друкуе дріб)
 	void print()
 	{
 		if (this->denom == 1)
@@ -143,3 +263,19 @@ public:
 			std::cout << numer << '/' << denom << '\n';
 	}
 };
+
+//Ф-ція перегрузки опаратора додавання
+Fraction operator+(int num, Fraction& d)
+{
+	Fraction temp;
+	temp.setNumer(num);
+	return temp.add(d);
+}
+
+//Ф-ція перегрузки опаратора віднімання
+Fraction operator-(int num, Fraction& d)
+{
+	Fraction temp;
+	temp.setNumer(num);
+	return temp.dif(d);
+}

@@ -3,13 +3,13 @@
 
 int main()
 {
-	Fraction a(3, 7);
-	Fraction b(4,5);
-	Fraction с;
+	Fraction a(1, 9);
+	Fraction b(3,3);
+	Fraction c;
 		
 	a.print();
 	b.print();
-	с.print();
+	c.print();
 
 	//додавання
 	//c = a.add(b);
@@ -26,6 +26,35 @@ int main()
 	//ділення
 	//с = a.div(0);
 	//с.print();
+
+	//який з дробів більший
+	//c = a.more(b);
+	//c.print();
+
+	// Який з дробів менший
+	//c = a.less(b);
+	//c.print();
+
+	// порівняти дроби
+	//a.compare(b);
+	
+	////Префіксний інкремент
+	//++a;
+	//a.print();
+	//Постфіксний інкремент
+	//c = a++;
+	//a.print();
+	//c.print();
+	
+	//c = a + b;
+	//c = a + 2;
+	//c.print();
+	//c = 2 + c;
+	//c.print();
+
+	c = 2 - a;
+	c.print();
+	
 
 	return 0;
 }
