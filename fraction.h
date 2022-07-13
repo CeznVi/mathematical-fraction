@@ -90,7 +90,7 @@ public:
 			denom = numDown;
 	}
 
-	//Метод додавання дробей (дроб з дробом)
+	//Метод додавання дробей 
 	Fraction add(const Fraction& d)
 	{
 		Fraction temp;
@@ -99,16 +99,41 @@ public:
 		temp.сut();
 		return temp;
 	}
-	//Перегрузка методу додавання дробей (дроб з числом)
-	Fraction add(int a)
+
+	//Метод віднімання дробей
+	Fraction dif(const Fraction& d)
 	{
 		Fraction temp;
-		temp.numer = this->numer + (a * this->denom);
-		temp.denom = this->denom;
+		temp.numer = ((d.denom) * (this->numer)) - ((d.numer) * (this->denom));
+		temp.denom = (d.denom * this->denom);
+		temp.сut();
+		return temp;
+	}
+	
+	//Метод множення дробів 
+	Fraction mult(const Fraction& d)
+	{
+		Fraction temp;
+		temp.numer = (d.numer * this->numer);
+		temp.denom = (d.denom * this->denom);
 		temp.сut();
 		return temp;
 	}
 
+	//Метод ділення дробів 
+	Fraction div(const Fraction& d)
+	{
+		if (d.numer == 0)
+		{
+			std::cout << "Eror.Cannot be divided by 0 \n";
+			return 0;
+		}
+		Fraction temp;
+		temp.numer = this->numer * d.denom;
+		temp.denom = this->denom * d.numer;
+		temp.сut();
+		return temp;
+	}
 
 	void print()
 	{
