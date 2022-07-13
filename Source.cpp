@@ -3,17 +3,21 @@
 
 int main()
 {
-	Fraction a(1, 2);
-	Fraction b(1,2);
+	Fraction a(4, 2);
+	Fraction b(3,4);
+	Fraction с(2);
+	
 	
 	a.print();
 	b.print();
+	с.print();
 
-	a.add(&b);
+	a = a.add(5);
 	a.print();
-	//непрацює
-	//Fraction c = a + b;
 
+	с = a.add(b);
+	с.print();
+	
 
 
 	return 0;
