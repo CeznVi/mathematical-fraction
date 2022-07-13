@@ -45,14 +45,6 @@ private:
 		return (num2 > num1) ? true : false;
 	}
 	
-	//Інспектори порівняння дробів (==)
-	bool isEqual(const Fraction& d)
-	{
-		float num1 = static_cast<float>(this->numer) / this->denom;
-		float num2 = static_cast<float>(d.numer) / d.denom;
-		return (num2 == num1) ? true : false;
-	}
-
 	////Метод скорочення дробу
 	void сut()
 	{
@@ -104,6 +96,14 @@ public:
 			denom = 1;
 		else 
 			denom = numDown;
+	}
+
+	//Інспектори порівняння дробів (==)
+	bool isEqual(const Fraction& d)
+	{
+		float num1 = static_cast<float>(this->numer) / this->denom;
+		float num2 = static_cast<float>(d.numer) / d.denom;
+		return (num2 == num1) ? true : false;
 	}
 
 	//Метод додавання дробей, повертає результуючій дріб
@@ -254,6 +254,57 @@ public:
 	//Метод віднімання дробів ( інт - клас = клас)
 	//винесено з класу через неможливість обійти помилку з двома членами
 
+	////Методи множення дробів(+перегрузки)
+	//Метод множення дробів (клас * клас = клас)
+	Fraction operator*(Fraction& d)
+	{
+		return this->mult(d);
+	}
+	//Метод множення дробів (клас * інт = клас)
+	Fraction operator*(const int d)
+	{
+		return this->mult(d);
+	}
+	//Метод множення дробів ( інт * клас = клас)
+	//винесено з класу через неможливість обійти помилку з двома членами
+
+	////Методи ділення дробів(+перегрузки)
+	//Метод ділення дробів (клас / клас = клас)
+	Fraction operator/(Fraction& d)
+	{
+		return this->div(d);
+	}
+	//Метод ділення дробів (клас / інт = клас)
+	Fraction operator/(const int d)
+	{
+		return this->div(d);
+	}
+	//Метод ділення дробів ( інт / клас = клас)
+	//винесено з класу через неможливість обійти помилку з двома членами
+
+	////Методи порівняння дробів(+перегрузки)
+	//Інспектор рівності дробів ( клас == клас )
+	bool operator==(Fraction& d)
+	{
+		return this->isEqual(d);
+	}
+	//Інспектор рівності дробів ( int == клас )
+	bool operator==(const int d)
+	{
+		return this->isEqual(d);
+	}
+	//Інспектор нерівності дробів ( клас == клас )
+	bool operator!=(Fraction& d)
+	{
+		return this->isEqual(d);
+	}
+	//Інспектор нерівності дробів ( int == клас )
+	bool operator!=(const int d)
+	{
+		return this->isEqual(d);
+	}
+
+
 	//Геттер (друкуе дріб)
 	void print()
 	{
@@ -278,4 +329,36 @@ Fraction operator-(int num, Fraction& d)
 	Fraction temp;
 	temp.setNumer(num);
 	return temp.dif(d);
+}
+
+//Ф-ція перегрузки опаратора множення
+Fraction operator*(int num, Fraction& d)
+{
+	Fraction temp;
+	temp.setNumer(num);
+	return temp.mult(d);
+}
+
+//Ф-ція перегрузки опаратора ділення
+Fraction operator/(int num, Fraction& d)
+{
+	Fraction temp;
+	temp.setNumer(num);
+	return temp.div(d);
+}
+
+//Ф-ція інспекції рівності 
+bool operator==(int num, Fraction& d)
+{
+	Fraction temp;
+	temp.setNumer(num);
+	return temp.isEqual(d);
+}
+
+//Ф-ція інспекції нерівності 
+bool operator!=(int num, Fraction& d)
+{
+	Fraction temp;
+	temp.setNumer(num);
+	return temp.isEqual(d);
 }
