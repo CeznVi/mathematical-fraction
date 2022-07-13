@@ -36,14 +36,6 @@ private:
 		else
 			return false;
 	}
-
-	//Інспектори порівняння дробів (>)
-	bool isBig(const Fraction& d)
-	{
-		float num1 = static_cast<float>(this->numer) / this->denom;
-		float num2 = static_cast<float>(d.numer) / d.denom;
-		return (num2 > num1) ? true : false;
-	}
 	
 	////Метод скорочення дробу
 	void сut()
@@ -104,6 +96,22 @@ public:
 		float num1 = static_cast<float>(this->numer) / this->denom;
 		float num2 = static_cast<float>(d.numer) / d.denom;
 		return (num2 == num1) ? true : false;
+	}
+
+	//Інспектори порівняння дробів (<)
+	bool isBig(const Fraction& d)
+	{
+		float num1 = static_cast<float>(this->numer) / this->denom;
+		float num2 = static_cast<float>(d.numer) / d.denom;
+		return (num2 > num1) ? true : false;
+	}
+	
+	//Інспектори порівняння дробів (>)
+	bool isLittle(const Fraction& d)
+	{
+		float num1 = static_cast<float>(this->numer) / this->denom;
+		float num2 = static_cast<float>(d.numer) / d.denom;
+		return (num2 < num1) ? true : false;
 	}
 
 	//Метод додавання дробей, повертає результуючій дріб
@@ -304,6 +312,26 @@ public:
 		return this->isEqual(d);
 	}
 
+	//Інспектор < дробів ( клас < клас )
+	bool operator<(Fraction& d)
+	{
+		return this->isBig(d);
+	}
+	//Інспектор < дробів ( int < клас )
+	bool operator<(const int d)
+	{
+		return this->isBig(d);
+	}
+	//Інспектор > дробів ( клас > клас )
+	bool operator>(Fraction& d)
+	{
+		return this->isLittle(d);
+	}
+	//Інспектор > дробів ( int > клас )
+	bool operator>(const int d)
+	{
+		return this->isLittle(d);
+	}
 
 	//Геттер (друкуе дріб)
 	void print()
@@ -361,4 +389,20 @@ bool operator!=(int num, Fraction& d)
 	Fraction temp;
 	temp.setNumer(num);
 	return temp.isEqual(d);
+}
+
+//Ф-ція інспекції < 
+bool operator<(int num, Fraction& d)
+{
+	Fraction temp;
+	temp.setNumer(num);
+	return temp.isBig(d);
+}
+
+//Ф-ція інспекції > 
+bool operator>(int num, Fraction& d)
+{
+	Fraction temp;
+	temp.setNumer(num);
+	return temp.isLittle(d);
 }

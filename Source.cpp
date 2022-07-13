@@ -2,6 +2,8 @@
 #include <Windows.h>
 #include "fraction.h"
 
+
+
 int main()
 {
 	SetConsoleCP(1251);
@@ -42,7 +44,9 @@ int main()
 	std::cout << "bool i = a == b;\n";
 	bool i = a == b;
 	std::cout << "i = " << i << " Примітка: 0 - false; 1 true" << '\n';
-	
+	std::cout << "bool i = a < b;\n";
+	i = a < b;
+	std::cout << "i = " << i << " Примітка: 0 - false; 1 true" << '\n';
 
 	return 0;
 }
